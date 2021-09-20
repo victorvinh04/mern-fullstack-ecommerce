@@ -19,10 +19,7 @@ const postSchema = new mongoose.Schema(
     comments: [
       {
         text: String,
-        created: {
-          type: Date,
-          default: Date.now,
-        },
+        created: { type: Date, default: Date.now },
         postedBy: {
           type: ObjectId,
           ref: "User",
@@ -32,4 +29,5 @@ const postSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
 export default mongoose.model("Post", postSchema);

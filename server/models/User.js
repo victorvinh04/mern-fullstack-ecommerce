@@ -35,11 +35,14 @@ const userSchema = new Schema(
       url: String,
       public_id: String,
     },
-    likes: [{ type: Schema.ObjectId, ref: "user" }],
+    role: {
+      type: String,
+      default: "Subscriber",
+    },
     following: [{ type: Schema.ObjectId, ref: "User" }],
     followers: [{ type: Schema.ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", userSchema);
+export default mongoose.model("User", userSchema);

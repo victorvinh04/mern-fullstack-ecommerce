@@ -3,7 +3,7 @@ import express from "express";
 const router = express.Router();
 
 //middlewares
-import { requireSignin } from "../middlewares";
+import { isAdmin, requireSignin } from "../middlewares";
 import {
   register,
   login,
@@ -16,6 +16,8 @@ import {
   userFollowing,
   removeFollower,
   userUnfollow,
+  searchUser,
+  getUser,
 } from "../controllers/auth";
 
 router.post("/register", register);
@@ -29,5 +31,10 @@ router.get("/find-people", requireSignin, findPeople);
 router.put("/user-follow", requireSignin, addFollower, userFollow);
 router.put("/user-unfollow", requireSignin, removeFollower, userUnfollow);
 router.get("/user-following", requireSignin, userFollowing);
+
+router.get("/search-user/:query", searchUser);
+router.get("/user/:username", getUser);
+
+router.get("/current-admin", requireSignin, isAdmin, currentUser);
 
 module.exports = router;
